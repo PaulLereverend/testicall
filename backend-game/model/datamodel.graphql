@@ -1,0 +1,16 @@
+"""
+@model
+"""
+type Game {
+  """
+  @id
+  """
+  id: ID!
+  userId: ID!
+  isFinished: Boolean!
+  score: Int
+}
+
+type Query {
+  getUserGames(userId: ID!): [Game]
+}
