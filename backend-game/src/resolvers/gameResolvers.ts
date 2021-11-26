@@ -3,13 +3,18 @@ import { IResolvers } from "apollo-server-express";
 import { GraphQLResolveInfo } from "graphql";
 import { v4 } from "uuid";
 import { GameFilter } from "../generated-types";
-import { GraphQLContext } from "../customContext";
 import games from "../../game-themes.json";
 import { IFullContext } from "../context";
+import { shuffle } from "../utils";
 
 interface IGenerateGameArgs {
   theme: string;
   difficulty?: number;
+}
+
+interface ISetGetScoreArgs {
+  id: string;
+  score: number;
 }
 
 export const gameResolvers: IResolvers = {
@@ -20,7 +25,6 @@ export const gameResolvers: IResolvers = {
       context: IFullContext,
       info: GraphQLResolveInfo
     ) => {
-      const {} = context;
       const filter: QueryFilter<GameFilter> = {
         userId: {
           eq: context.userId,
@@ -49,14 +53,39 @@ export const gameResolvers: IResolvers = {
         return game.theme === args.theme;
       });
       if (!gameData) throw new Error("no matching theme found");
+      const shuffledGame = {
+        theme: gameData?.theme,
+        data: shuffle(gameData?.data),
+      };
+      if (args.difficulty && args.difficulty < shuffledGame.data.length) {
+        shuffledGame.data = shuffledGame.data.slice(0, args.difficulty);
+      }
+      const result = await context.graphback.Game.create({
+        id,
+        userId: context.userId,
+        isFinished: false,
+        theme: args.theme,
+        difficulty: args.difficulty,
+      });
+      return { id, gameData: shuffledGame };
+    },
+    setGameScore: async (
+      parent: any,
+      args: ISetGetScoreArgs,
+      context: IFullContext,
+      info: GraphQLResolveInfo
+    ) => {
       try {
-        const result = await context.graphback.Game.create({
-          id,
+        const results = await context.graphback.Game.update({
+          id: args.id,
           userId: context.userId,
-          isFinished: false,
+          score: args.score,
+          isFinished: true,
         });
-      } catch (error) {}
-      return { id, gameData };
+        return true;
+      } catch (error) {
+        throw error;
+      }
     },
   },
 };

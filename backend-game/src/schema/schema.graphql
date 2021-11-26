@@ -100,6 +100,7 @@ input MutateGameInput {
 
 type Mutation {
   generateGame(theme: String!, difficulty: Int): GeneratedGame
+  setGameScore(id: String!, score: Int!): Boolean
   createGame(input: CreateGameInput!): Game
   updateGame(input: MutateGameInput!): Game
   deleteGame(input: MutateGameInput!): Game
@@ -117,6 +118,7 @@ input PageRequest {
 
 type Query {
   getUserGames: [Game]
+  getThemes: [String]
   getGame(id: String!): Game
   findGames(filter: GameFilter, page: PageRequest, orderBy: OrderByInput): GameResultList!
 }
