@@ -5,6 +5,7 @@ import { v4 } from "uuid";
 import { GameFilter } from "../generated-types";
 import games from "../../game-themes.json";
 import { IFullContext } from "../context";
+import { shuffle } from "../utils";
 
 interface IGenerateGameArgs {
   theme: string;
@@ -48,6 +49,10 @@ export const gameResolvers: IResolvers = {
         return game.theme === args.theme;
       });
       if (!gameData) throw new Error("no matching theme found");
+      const shuffledGame = {
+        theme: gameData?.theme,
+        data: shuffle(gameData?.data),
+      };
       try {
         const result = await context.graphback.Game.create({
           id,
@@ -55,7 +60,7 @@ export const gameResolvers: IResolvers = {
           isFinished: false,
         });
       } catch (error) {}
-      return { id, gameData };
+      return { id, gameData: shuffledGame };
     },
   },
 };
