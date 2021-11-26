@@ -1,0 +1,6 @@
+<div *ngIf="!this.isAuthenticated()" class="container">
+    <app-authenticate></app-authenticate>
+</div>
+<div *ngIf="this.isAuthenticated()" class="container">
+    Tu es connecté bg
+</div>

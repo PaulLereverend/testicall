@@ -1,0 +1,69 @@
+<mat-card *ngIf="signin">
+    <form [formGroup]="connectForm" (ngSubmit)="connect()">
+        <mat-card-content>
+
+            <div class="center-verticaly">
+                <mat-form-field appearance="fill">
+                    <mat-label>Adresse email</mat-label>
+                    <input matInput formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Mot de passe</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="right">
+                <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+                <button mat-flat-button color="primary" (click)="signin = !signin; errorMessage = undefined">S'inscrire</button>
+                <button mat-flat-button id="connectButton" type="submit">Se connecter</button>
+            </div>
+
+        </mat-card-content>
+    </form>
+</mat-card>
+<mat-card *ngIf="!signin">
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+        <mat-card-content>
+
+            <div class="center-verticaly">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="firstName">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Adresse email</mat-label>
+                    <input matInput formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Mot de passe</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Confirmation du mot de passe</mat-label>
+                    <input matInput type="password" formControlName="secondPassword">
+                </mat-form-field>
+            </div>
+            <div class="right">
+                <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+                <button mat-flat-button color="primary" (click)="signin = !signin; errorMessage = undefined">J'ai déjà un compte</button>
+                <button mat-flat-button id="connectButton" type="submit">Valider</button>
+            </div>
+
+        </mat-card-content>
+    </form>
+</mat-card>
