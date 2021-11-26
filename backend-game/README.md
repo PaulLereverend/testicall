@@ -12,14 +12,16 @@ The project has been created using Graphback. Run the project using the followin
 docker-compose up -d
 ```
 
+- Generate a new `.env` configuration
+
+```
+yarn init-env
+```
+
+You can now edit the `.env` file according to your needs (tho the default configuration should work if you don't change anything).
+
 - Inspect your schema in the `model/datamodel.graphql` file.
 - Start the server
-
-```
-npm run develop
-```
-
-Or, if using yarn
 
 ```
 yarn develop
@@ -28,6 +30,15 @@ yarn develop
 For more on customizing your Graphback application, check out [our docs](https://graphback.dev/docs/gettingstarted)
 
 If your project contains the client application then please follow [`./client/README.md`](./client/README.md) for info regarding running the client-side.
+
+### Running in production
+
+To run the project in production, use
+
+```
+yarn build
+yarn start
+```
 
 ### Dependencies and Tools
 
