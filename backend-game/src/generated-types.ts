@@ -124,7 +124,6 @@ export type Mutation = {
 };
 
 export type MutationGenerateGameArgs = {
-  userId: Scalars["String"];
   theme: Scalars["String"];
   difficulty?: InputMaybe<Scalars["Int"]>;
 };
@@ -156,10 +155,6 @@ export type Query = {
   getUserGames?: Maybe<Array<Maybe<Game>>>;
   getGame?: Maybe<Game>;
   findGames: GameResultList;
-};
-
-export type QueryGetUserGamesArgs = {
-  userId: Scalars["String"];
 };
 
 export type QueryGetGameArgs = {
