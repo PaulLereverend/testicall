@@ -24,26 +24,46 @@ export type BooleanInput = {
 };
 
 export type CreateGameInput = {
-  userId: Scalars["ID"];
+  id: Scalars["String"];
+  userId: Scalars["String"];
   isFinished: Scalars["Boolean"];
   score?: InputMaybe<Scalars["Int"]>;
+  theme?: InputMaybe<Scalars["String"]>;
+  difficulty?: InputMaybe<Scalars["Int"]>;
+};
+
+export type FullGameData = {
+  __typename?: "FullGameData";
+  theme: Scalars["String"];
+  data: Array<GameData>;
 };
 
 /** @model */
 export type Game = {
   __typename?: "Game";
   /** @id */
-  id: Scalars["ID"];
-  userId: Scalars["ID"];
+  id: Scalars["String"];
+  userId: Scalars["String"];
   isFinished: Scalars["Boolean"];
   score?: Maybe<Scalars["Int"]>;
+  theme?: Maybe<Scalars["String"]>;
+  difficulty?: Maybe<Scalars["Int"]>;
+};
+
+export type GameData = {
+  __typename?: "GameData";
+  question: Scalars["String"];
+  answers: Array<Scalars["String"]>;
+  correctAnswer: Scalars["Int"];
 };
 
 export type GameFilter = {
-  id?: InputMaybe<IdInput>;
-  userId?: InputMaybe<IdInput>;
+  id?: InputMaybe<StringInput>;
+  userId?: InputMaybe<StringInput>;
   isFinished?: InputMaybe<BooleanInput>;
   score?: InputMaybe<IntInput>;
+  theme?: InputMaybe<StringInput>;
+  difficulty?: InputMaybe<IntInput>;
   and?: InputMaybe<Array<GameFilter>>;
   or?: InputMaybe<Array<GameFilter>>;
   not?: InputMaybe<GameFilter>;
@@ -61,20 +81,18 @@ export type GameSubscriptionFilter = {
   and?: InputMaybe<Array<GameSubscriptionFilter>>;
   or?: InputMaybe<Array<GameSubscriptionFilter>>;
   not?: InputMaybe<GameSubscriptionFilter>;
-  id?: InputMaybe<IdInput>;
-  userId?: InputMaybe<IdInput>;
+  id?: InputMaybe<StringInput>;
+  userId?: InputMaybe<StringInput>;
   isFinished?: InputMaybe<BooleanInput>;
   score?: InputMaybe<IntInput>;
+  theme?: InputMaybe<StringInput>;
+  difficulty?: InputMaybe<IntInput>;
 };
 
-export type IdInput = {
-  ne?: InputMaybe<Scalars["ID"]>;
-  eq?: InputMaybe<Scalars["ID"]>;
-  le?: InputMaybe<Scalars["ID"]>;
-  lt?: InputMaybe<Scalars["ID"]>;
-  ge?: InputMaybe<Scalars["ID"]>;
-  gt?: InputMaybe<Scalars["ID"]>;
-  in?: InputMaybe<Array<Scalars["ID"]>>;
+export type GeneratedGame = {
+  __typename?: "GeneratedGame";
+  id: Scalars["String"];
+  gameData: FullGameData;
 };
 
 export type IntInput = {
@@ -89,17 +107,26 @@ export type IntInput = {
 };
 
 export type MutateGameInput = {
-  id: Scalars["ID"];
-  userId?: InputMaybe<Scalars["ID"]>;
+  id: Scalars["String"];
+  userId?: InputMaybe<Scalars["String"]>;
   isFinished?: InputMaybe<Scalars["Boolean"]>;
   score?: InputMaybe<Scalars["Int"]>;
+  theme?: InputMaybe<Scalars["String"]>;
+  difficulty?: InputMaybe<Scalars["Int"]>;
 };
 
 export type Mutation = {
   __typename?: "Mutation";
+  generateGame?: Maybe<GeneratedGame>;
   createGame?: Maybe<Game>;
   updateGame?: Maybe<Game>;
   deleteGame?: Maybe<Game>;
+};
+
+export type MutationGenerateGameArgs = {
+  userId: Scalars["String"];
+  theme: Scalars["String"];
+  difficulty?: InputMaybe<Scalars["Int"]>;
 };
 
 export type MutationCreateGameArgs = {
@@ -131,8 +158,12 @@ export type Query = {
   findGames: GameResultList;
 };
 
+export type QueryGetUserGamesArgs = {
+  userId: Scalars["String"];
+};
+
 export type QueryGetGameArgs = {
-  id: Scalars["ID"];
+  id: Scalars["String"];
 };
 
 export type QueryFindGamesArgs = {
@@ -145,6 +176,19 @@ export enum SortDirectionEnum {
   Desc = "DESC",
   Asc = "ASC",
 }
+
+export type StringInput = {
+  ne?: InputMaybe<Scalars["String"]>;
+  eq?: InputMaybe<Scalars["String"]>;
+  le?: InputMaybe<Scalars["String"]>;
+  lt?: InputMaybe<Scalars["String"]>;
+  ge?: InputMaybe<Scalars["String"]>;
+  gt?: InputMaybe<Scalars["String"]>;
+  in?: InputMaybe<Array<Scalars["String"]>>;
+  contains?: InputMaybe<Scalars["String"]>;
+  startsWith?: InputMaybe<Scalars["String"]>;
+  endsWith?: InputMaybe<Scalars["String"]>;
+};
 
 export type Subscription = {
   __typename?: "Subscription";
