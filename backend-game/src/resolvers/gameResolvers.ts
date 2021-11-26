@@ -53,13 +53,15 @@ export const gameResolvers: IResolvers = {
         theme: gameData?.theme,
         data: shuffle(gameData?.data),
       };
-      try {
-        const result = await context.graphback.Game.create({
-          id,
-          userId: context.userId,
-          isFinished: false,
-        });
-      } catch (error) {}
+      if (args.difficulty && args.difficulty < shuffledGame.data.length) {
+        shuffledGame.data = shuffledGame.data.slice(0, args.difficulty);
+      }
+      const result = await context.graphback.Game.create({
+        id,
+        userId: context.userId,
+        isFinished: false,
+        difficulty: args.difficulty,
+      });
       return { id, gameData: shuffledGame };
     },
   },
