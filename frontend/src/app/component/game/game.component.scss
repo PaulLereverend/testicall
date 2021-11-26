@@ -1,0 +1,23 @@
+.center-verticaly {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    mat-form-field {
+        width: 50%;
+    }
+}
+
+.right {
+    display: flex;
+    column-gap: 20px;
+    justify-content: flex-end;
+}
+
+.validButton {
+    background-color: #00b159;
+    color: white;
+}
+
+mat-card {
+    margin: 20px;
+}

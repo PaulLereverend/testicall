@@ -1,0 +1,43 @@
+<div class="container" *ngIf="questions.length == 0">
+    <mat-card>
+        <form [formGroup]="gameForm" (ngSubmit)="createGame()">
+            <mat-card-content class="center-verticaly">
+                <mat-form-field appearance="fill">
+                    <mat-label>Thème</mat-label>
+                    <mat-select formControlName="theme">
+                        <mat-option *ngFor="let theme of themes" [value]="theme">
+                            {{theme}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Difficulté</mat-label>
+                    <input matInput type="number" formControlName="difficulty">
+                </mat-form-field>
+
+                <button mat-flat-button class="validButton" type="submit">Jouer</button>
+                <mat-error *ngIf="errorMessage">Veuillez sélectionner un thème et une difficulté</mat-error>
+            </mat-card-content>
+        </form>
+    </mat-card>
+</div>
+<div class="container" *ngIf="questions.length > 0">
+    <mat-card *ngFor="let question of questions;let indexOfQuestion=index;">
+        <mat-card-content class="center-verticaly">
+            <h1>{{question.question}}</h1>
+
+            <div class="center-verticaly">
+                <mat-radio-group class="center-verticaly">
+                    <mat-radio-button *ngFor="let answer of (question.answers);let indexOfResponse=index;" value="{{indexOfResponse}}" (change)="choose(indexOfQuestion, $event)">{{answer}}</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-content class="center-verticaly">
+            <button mat-flat-button class="validButton" type="button" (click)="sendResult()">Valider</button>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GameComponent } from './component/game/game.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AuthGuard } from './guard/auth.guard';
@@ -14,6 +15,7 @@ const routes: Routes = [
   //   canActivate: [AuthGuard] 
   // },
   { path: 'user/profile', component: ProfileComponent },
+  { path: 'game', component: GameComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: ''}
 ];
 
