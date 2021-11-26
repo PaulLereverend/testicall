@@ -31,8 +31,10 @@ type GeneratedGame {
 
 type Query {
   getUserGames: [Game]
+  getThemes: [String]
 }
 
 type Mutation {
   generateGame(theme: String!, difficulty: Int): GeneratedGame
+  setGameScore(id: String!, score: Int!): Boolean
 }

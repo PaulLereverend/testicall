@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { GraphQLContext } from "./customContext";
+import { GraphQLContext } from "./graphbackContext";
 
 export interface IFullContext extends GraphQLContext, IContext {}
 interface IAuthToken {
