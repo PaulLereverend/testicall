@@ -60,6 +60,7 @@ export const gameResolvers: IResolvers = {
         id,
         userId: context.userId,
         isFinished: false,
+        theme: args.theme,
         difficulty: args.difficulty,
       });
       return { id, gameData: shuffledGame };
