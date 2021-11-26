@@ -23,12 +23,18 @@ export class UserService {
     return this.http.post<User>("http://localhost:7050/user/sign-up", newUser);
   }
 
-  autoConnect(){
+  tryAutoConnect(){
     if (localStorage.getItem('token')) {
       this.http.get<User>("http://localhost:7050/user/loggedUser").subscribe(user => {
         this.authUser = user;
       })
     }
+  }
+
+  logUser(user: User){
+    this.authUser = user
+    let token = user.token?.replace("Bearer ", "")
+    localStorage.setItem('token', token ? token : '');
   }
 
   isAuthenticated(): boolean{

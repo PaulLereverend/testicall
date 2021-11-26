@@ -17,8 +17,8 @@
                 </mat-form-field>
             </div>
             <div class="right">
-                <mat-error *ngIf="invalidConnection">Email ou mot de passe incorrect</mat-error>
-                <button mat-flat-button color="primary" (click)="signin = !signin">S'inscrire</button>
+                <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+                <button mat-flat-button color="primary" (click)="signin = !signin; errorMessage = undefined">S'inscrire</button>
                 <button mat-flat-button id="connectButton" type="submit">Se connecter</button>
             </div>
 
@@ -59,7 +59,8 @@
                 </mat-form-field>
             </div>
             <div class="right">
-                <button mat-flat-button color="primary" (click)="signin = !signin">J'ai déjà un compte</button>
+                <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+                <button mat-flat-button color="primary" (click)="signin = !signin; errorMessage = undefined">J'ai déjà un compte</button>
                 <button mat-flat-button id="connectButton" type="submit">Valider</button>
             </div>
 

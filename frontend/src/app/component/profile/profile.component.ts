@@ -10,7 +10,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.userService.tryAutoConnect()
   }
 
   isAuthenticated(){    

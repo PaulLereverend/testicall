@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user/user';
 import { UserService } from 'src/app/service/user/user.service';
 
@@ -24,45 +25,40 @@ export class AuthenticateComponent implements OnInit {
 
   hidePassword: boolean = true;
   signin: boolean = true;
-  invalidConnection: boolean = false;
+  errorMessage: string | undefined = "";
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   connect() {
-    console.log(this.connectForm.value);
-
     this.userService.logIn(this.connectForm.value.email, this.connectForm.value.password).subscribe( {
       next: (user: User) => {
-
-        this.userService.authUser = user
-        let token = user.token?.replace("Bearer ", "")
-        localStorage.setItem('token', token ? token : '');
-        console.log(user);
+        this.userService.logUser(user)
+        this.router.navigateByUrl("/game")
       }, 
       error: (err) => {
-        this.invalidConnection = true
-        console.error(err);
-        
+        this.errorMessage = "Email ou mot de passe incorrect"
+        // console.error(err);
       }
     })
   }
 
   signUp() {
-    console.log(this.signUpForm.value);
-    
     if (this.signUpForm.value.password === this.signUpForm.value.secondPassword) {
       this.userService.signUp(this.signUpForm.value as User).subscribe( {
-        next: (response) => {
-          console.log(response);
-          
+        next: (user: User) => {
+          this.userService.logUser(user)
+          this.router.navigateByUrl("/game")
         },
         error : (err) => {
-          console.error(err);
+          this.errorMessage = "Veuillez remplir tous les champs"
+          // console.error(err);
         }
       })
+    }else{
+      this.errorMessage = "Les mots de passe ne sont pas égaux"
     }
   }
 
