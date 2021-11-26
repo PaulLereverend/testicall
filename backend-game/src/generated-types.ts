@@ -118,6 +118,7 @@ export type MutateGameInput = {
 export type Mutation = {
   __typename?: "Mutation";
   generateGame?: Maybe<GeneratedGame>;
+  setGameScore?: Maybe<Scalars["Boolean"]>;
   createGame?: Maybe<Game>;
   updateGame?: Maybe<Game>;
   deleteGame?: Maybe<Game>;
@@ -126,6 +127,11 @@ export type Mutation = {
 export type MutationGenerateGameArgs = {
   theme: Scalars["String"];
   difficulty?: InputMaybe<Scalars["Int"]>;
+};
+
+export type MutationSetGameScoreArgs = {
+  id: Scalars["String"];
+  score: Scalars["Int"];
 };
 
 export type MutationCreateGameArgs = {

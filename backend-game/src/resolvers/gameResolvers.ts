@@ -12,6 +12,11 @@ interface IGenerateGameArgs {
   difficulty?: number;
 }
 
+interface ISetGetScoreArgs {
+  id: string;
+  score: number;
+}
+
 export const gameResolvers: IResolvers = {
   Query: {
     getUserGames: async (
@@ -20,7 +25,6 @@ export const gameResolvers: IResolvers = {
       context: IFullContext,
       info: GraphQLResolveInfo
     ) => {
-      const {} = context;
       const filter: QueryFilter<GameFilter> = {
         userId: {
           eq: context.userId,
@@ -64,6 +68,24 @@ export const gameResolvers: IResolvers = {
         difficulty: args.difficulty,
       });
       return { id, gameData: shuffledGame };
+    },
+    setGameScore: async (
+      parent: any,
+      args: ISetGetScoreArgs,
+      context: IFullContext,
+      info: GraphQLResolveInfo
+    ) => {
+      try {
+        const results = await context.graphback.Game.update({
+          id: args.id,
+          userId: context.userId,
+          score: args.score,
+          isFinished: true,
+        });
+        return true;
+      } catch (error) {
+        throw error;
+      }
     },
   },
 };

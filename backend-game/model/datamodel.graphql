@@ -36,4 +36,5 @@ type Query {
 
 type Mutation {
   generateGame(theme: String!, difficulty: Int): GeneratedGame
+  setGameScore(id: String!, score: Int!): Boolean
 }
