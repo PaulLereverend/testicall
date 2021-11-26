@@ -3,7 +3,6 @@ import { IResolvers } from "apollo-server-express";
 import { GraphQLResolveInfo } from "graphql";
 import { v4 } from "uuid";
 import { GameFilter } from "../generated-types";
-import { GraphQLContext } from "../customContext";
 import games from "../../game-themes.json";
 import { IFullContext } from "../context";
 

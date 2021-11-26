@@ -34,6 +34,11 @@ const dbConfig = loadDBConfig();
 
 const { typeDefs, resolvers, contextCreator } = buildGraphbackAPI(modelDefs, {
   dataProviderCreator: createKnexDbProvider(db),
+  crud: {
+    create: false,
+    delete: false,
+    update: false,
+  },
 });
 
 migrateDB(dbConfig, typeDefs, {
