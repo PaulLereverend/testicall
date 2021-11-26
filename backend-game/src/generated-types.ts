@@ -153,6 +153,7 @@ export type PageRequest = {
 export type Query = {
   __typename?: "Query";
   getUserGames?: Maybe<Array<Maybe<Game>>>;
+  getThemes?: Maybe<Array<Maybe<Scalars["String"]>>>;
   getGame?: Maybe<Game>;
   findGames: GameResultList;
 };

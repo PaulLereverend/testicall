@@ -117,6 +117,7 @@ input PageRequest {
 
 type Query {
   getUserGames: [Game]
+  getThemes: [String]
   getGame(id: String!): Game
   findGames(filter: GameFilter, page: PageRequest, orderBy: OrderByInput): GameResultList!
 }

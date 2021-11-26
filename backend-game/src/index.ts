@@ -9,6 +9,7 @@ import { loadDBConfig, connectDB } from "./db";
 import { migrateDB, removeNonSafeOperationsFilter } from "graphql-migrations";
 import { createKnexDbProvider } from "@graphback/runtime-knex";
 import { gameResolvers } from "./resolvers/gameResolvers";
+import { themeResolvers } from "./resolvers/themesResolver";
 import { loadConfigSync } from "graphql-config";
 import { getAuthenticatedContext } from "./context";
 
@@ -49,7 +50,7 @@ migrateDB(dbConfig, typeDefs, {
 
 const apolloServer = new ApolloServer({
   typeDefs,
-  resolvers: [resolvers, gameResolvers],
+  resolvers: [resolvers, gameResolvers, themeResolvers],
   context: async (context: any) => {
     if (!context.req) throw Error("req undefined");
 
