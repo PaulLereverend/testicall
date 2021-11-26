@@ -5,12 +5,34 @@ type Game {
   """
   @id
   """
-  id: ID!
-  userId: ID!
+  id: String!
+  userId: String!
   isFinished: Boolean!
   score: Int
+  theme: String
+  difficulty: Int
+}
+
+type FullGameData {
+  theme: String!
+  data: [GameData!]!
+}
+
+type GameData {
+  question: String!
+  answers: [String!]!
+  correctAnswer: Int!
+}
+
+type GeneratedGame {
+  id: String!
+  gameData: FullGameData!
 }
 
 type Query {
-  getUserGames(userId: ID!): [Game]
+  getUserGames(userId: String!): [Game]
+}
+
+type Mutation {
+  generateGame(userId: String!, theme: String!, difficulty: Int): GeneratedGame
 }

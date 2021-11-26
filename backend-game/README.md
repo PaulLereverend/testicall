@@ -72,6 +72,8 @@ This will update the generated `schema.graphql` file and then generate the `gene
 
 Running `yarn generate` executes a script which relies on two things, [Graphback CLI](https://graphback.dev/docs/cli/graphback-cli) and [Codegen](https://graphql-code-generator.com/). It is a two step process which is explained below.
 
+If codegen fails to regenerate the `generated-types.ts` file, you can use [Graphql Code Generator](https://www.graphql-code-generator.com/).
+
 > Game: You have to run the above commands on each modification of your business model on the server-side. This ensures that the client is kept in sync with changes on the server-side.
 
 ### Step 1: GraphQL Schema File Generation
