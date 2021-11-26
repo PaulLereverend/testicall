@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isAuthenticated(){
+  isAuthenticated(){    
     return this.userService.isAuthenticated();
   }
 
