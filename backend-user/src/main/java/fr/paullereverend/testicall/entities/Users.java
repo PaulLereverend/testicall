@@ -3,6 +3,7 @@ package fr.paullereverend.testicall.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -24,9 +25,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Users implements Serializable {
 
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column(columnDefinition = "BINARY(16)")
+	@GeneratedValue
+	private UUID id;
 	
 	@Column(name = "email")
 	private String email;

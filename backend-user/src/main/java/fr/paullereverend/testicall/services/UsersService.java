@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsersService implements UserDetailsService{
@@ -78,7 +79,7 @@ public class UsersService implements UserDetailsService{
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
 			if (authentication.isAuthenticated()){
-				String token = JWTAuthenticationFilter.generateAndSetToken(u.getEmail());
+				String token = JWTAuthenticationFilter.generateAndSetToken(u.getId().toString());
 				return new UserAuth(user, token);
 			}
 		}
@@ -93,7 +94,7 @@ public class UsersService implements UserDetailsService{
 		user.setPassword(bCryptPasswordEncoder.encode(newPassword));
 		return usersRepo.save(user);
 	}
-	public Users delete(@PathVariable long id) {
+	public Users delete(@PathVariable UUID id) {
 		Optional<Users> user = usersRepo.findById(id);
 		if(!user.isPresent()) {
 			throw new UserNotFoundException("User not found");
