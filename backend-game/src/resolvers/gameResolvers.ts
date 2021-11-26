@@ -5,12 +5,9 @@ import { v4 } from "uuid";
 import { GameFilter } from "../generated-types";
 import { GraphQLContext } from "../customContext";
 import games from "../../game-themes.json";
+import { IFullContext } from "../context";
 
-interface IGetUserGamesArgs {
-  userId: string;
-}
 interface IGenerateGameArgs {
-  userId: string;
   theme: string;
   difficulty?: number;
 }
@@ -19,13 +16,14 @@ export const gameResolvers: IResolvers = {
   Query: {
     getUserGames: async (
       parent: any,
-      args: IGetUserGamesArgs,
-      context: GraphQLContext,
+      args: any,
+      context: IFullContext,
       info: GraphQLResolveInfo
     ) => {
+      const {} = context;
       const filter: QueryFilter<GameFilter> = {
         userId: {
-          eq: args.userId,
+          eq: context.userId,
         },
       };
 
@@ -42,22 +40,22 @@ export const gameResolvers: IResolvers = {
     generateGame: async (
       parent: any,
       args: IGenerateGameArgs,
-      context: GraphQLContext,
+      context: IFullContext,
       info: GraphQLResolveInfo
     ) => {
-      if (!args.theme || !args.userId) throw new Error("invalid arguments");
+      if (!args.theme) throw new Error("invalid arguments");
       const id = v4();
       const gameData = games.themes.find((game) => {
         return game.theme === args.theme;
       });
       if (!gameData) throw new Error("no matching theme found");
-      const result = await context.graphback.Game.create({
-        id,
-        userId: args.userId,
-        isFinished: false,
-      });
-      console.log({ id, gameData });
-      console.log({ ...gameData });
+      try {
+        const result = await context.graphback.Game.create({
+          id,
+          userId: context.userId,
+          isFinished: false,
+        });
+      } catch (error) {}
       return { id, gameData };
     },
   },

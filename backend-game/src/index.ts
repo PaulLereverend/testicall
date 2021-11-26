@@ -10,6 +10,7 @@ import { migrateDB, removeNonSafeOperationsFilter } from "graphql-migrations";
 import { createKnexDbProvider } from "@graphback/runtime-knex";
 import { gameResolvers } from "./resolvers/gameResolvers";
 import { loadConfigSync } from "graphql-config";
+import { getAuthenticatedContext } from "./context";
 
 const app = express();
 
@@ -44,9 +45,19 @@ migrateDB(dbConfig, typeDefs, {
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers: [resolvers, gameResolvers],
-  context: contextCreator,
-});
+  context: async (context: any) => {
+    if (!context.req) throw Error("req undefined");
 
+    const authenticatedContext = await getAuthenticatedContext(
+      context.req,
+      contextCreator
+    );
+    return {
+      ...contextCreator(context),
+      ...authenticatedContext,
+    };
+  },
+});
 apolloServer.applyMiddleware({ app });
 
 const httpServer = http.createServer(app);
