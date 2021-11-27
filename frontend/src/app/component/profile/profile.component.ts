@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Game } from 'src/app/model/game';
+import { GameService } from 'src/app/service/game/game.service';
 import { UserService } from 'src/app/service/user/user.service';
 
 @Component({
@@ -8,14 +10,27 @@ import { UserService } from 'src/app/service/user/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  games: Game[] = [];
+  isAuthenticated: boolean = false;
+
+  constructor(private userService: UserService, private gameService: GameService) { }
 
   ngOnInit(): void {    
+    this.userService.authUserSub.subscribe( user => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.getGames();
+      }else{
+        this.isAuthenticated = false;
+      }
+    })
     this.userService.tryAutoConnect()
   }
 
-  isAuthenticated(){    
-    return this.userService.isAuthenticated();
+  getGames(){
+    this.gameService.getGames().subscribe( ({data}) => {
+      this.games = data.getUserGames;
+    })
   }
 
 }
