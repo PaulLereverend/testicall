@@ -1,4 +1,4 @@
-<div class="container" *ngIf="questions.length == 0">
+<div *ngIf="questions.length == 0">
     <mat-card>
         <form [formGroup]="gameForm" (ngSubmit)="createGame()">
             <mat-card-content class="center-verticaly">
@@ -22,7 +22,7 @@
         </form>
     </mat-card>
 </div>
-<div class="container" *ngIf="questions.length > 0">
+<div *ngIf="questions.length > 0">
     <mat-card *ngFor="let question of questions;let indexOfQuestion=index;">
         <mat-card-content class="center-verticaly">
             <h1>{{question.question}}</h1>
