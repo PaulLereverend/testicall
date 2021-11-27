@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   games: Game[] = [];
   scoreAverage: number = -1;
   isAuthenticated: boolean = false;
+  displayedColumns: string[] = ["id", "theme", "score"]
 
   constructor(private userService: UserService, private gameService: GameService) { }
 

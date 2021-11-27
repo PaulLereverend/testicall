@@ -9,6 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from "@angular/material/radio";
+import { MatTableModule } from "@angular/material/table";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home/home.component';
@@ -44,7 +45,8 @@ import { GameComponent } from './component/game/game.component';
     ReactiveFormsModule,
     MatCardModule,
     HttpClientModule,
-    GraphQLModule
+    GraphQLModule,
+    MatTableModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
