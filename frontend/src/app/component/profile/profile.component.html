@@ -2,12 +2,12 @@
     <app-authenticate></app-authenticate>
 </div>
 <div *ngIf="isAuthenticated && games.length > 0" class="container">
-    <h1>Tableau des scores :</h1>
+    <h1>Tableau des scores : {{scoreAverage}}% de bonnes réponses</h1>
     <mat-card *ngFor="let game of games;">
         <mat-card-content class="center-verticaly">
-            <h3>Partie : {{game.id}}</h3>
-            <h5>Thème : {{game.theme}}</h5>
-            <h5>Score : {{game.score}}/{{game.difficulty}}</h5>
+            <h2>Partie : {{game.id}}</h2>
+            <h3>Thème : {{game.theme}}</h3>
+            <h3>Score : {{game.score}}/{{game.difficulty}}</h3>
         </mat-card-content>
     </mat-card>
 </div>
@@ -15,7 +15,7 @@
     <h1>Tableau des scores :</h1>
     <mat-card>
         <mat-card-content class="center-verticaly">
-            <h3>Vous n'avez pas de score. Faite une partie pour obtenir un score.</h3>
+            <h2>Vous n'avez pas de score. Faite une partie pour obtenir un score.</h2>
         </mat-card-content>
     </mat-card>
 </div>

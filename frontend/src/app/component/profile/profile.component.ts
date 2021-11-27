@@ -11,6 +11,7 @@ import { UserService } from 'src/app/service/user/user.service';
 export class ProfileComponent implements OnInit {
 
   games: Game[] = [];
+  scoreAverage: number = -1;
   isAuthenticated: boolean = false;
 
   constructor(private userService: UserService, private gameService: GameService) { }
@@ -24,12 +25,21 @@ export class ProfileComponent implements OnInit {
         this.isAuthenticated = false;
       }
     })
-    this.userService.tryAutoConnect()
+
+    this.userService.tryAutoConnect()    
   }
 
   getGames(){
     this.gameService.getGames().subscribe( ({data}) => {
-      this.games = data.getUserGames;
+      let temp = Object.assign([], data.getUserGames);
+      this.games = temp.reverse();
+      let cumulativeScore: number = 0;
+      let cumulativeDifficulty: number = 0;
+      this.games.forEach( (game: Game) => {
+        cumulativeScore += game.score;
+        cumulativeDifficulty += game.difficulty;
+      })
+      this.scoreAverage = cumulativeScore/cumulativeDifficulty*100;      
     })
   }
 
