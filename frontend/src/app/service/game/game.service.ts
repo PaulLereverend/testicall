@@ -3,10 +3,8 @@ import { Apollo, gql } from 'apollo-angular';
 import { CreateGameResponse } from 'src/app/model/createGameResponse';
 
 const GET_THEMES = gql`
-  query getThemes {
-    theme {
-      title
-    }
+  query {
+    getThemes
   }
 `;
 
@@ -21,6 +19,12 @@ const GENERATE_GAME = gql`
         }
       }
     }
+  }
+`;
+
+const SET_GAME_SCORE = gql`
+  mutation SetGameScore($gameId: String!, $score: Int!) {
+    setGameScore(id : $gameId, score: $score)
   }
 `;
 
@@ -43,6 +47,16 @@ export class GameService {
       variables: {
         theme,
         difficulty
+      }
+    });
+  }
+
+  setGameScore(gameId: string, score: number){
+    return this.apollo.mutate<any>({
+      mutation: SET_GAME_SCORE,
+      variables: {
+        gameId,
+        score
       }
     });
   }

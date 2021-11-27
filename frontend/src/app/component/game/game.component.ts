@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreateGameResponse } from 'src/app/model/createGameResponse';
+import { GetAllThemesResponse } from 'src/app/model/getAllThemesResponse';
 import { Question } from 'src/app/model/question';
 import { GameService } from 'src/app/service/game/game.service';
 
@@ -16,26 +17,25 @@ export class GameComponent implements OnInit {
     difficulty: new FormControl('', [Validators.required]),
   });
 
-  themes: string[] = [
-    'series',
-    'music',
-    'videoGames'
-  ];
+  themes: string[] = [];
   errorMessage: boolean = false;
-  questions: Question[]= []
+  gameId: string = "";
+  questions: Question[] = []
   response: number[] = [];
 
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    
+    this.gameService.getAllThemes().subscribe( ({data}) => {
+      this.themes = (data as GetAllThemesResponse).getThemes
+    })
   }
 
   createGame(){
     if (this.gameForm.value.theme && this.gameForm.value.difficulty) {
       this.gameService.newGame(this.gameForm.value.theme, this.gameForm.value.difficulty).subscribe( ({data}) => {
-        let createGameResponse = data as CreateGameResponse
-        this.questions = createGameResponse.generateGame.gameData.data
+        this.questions = (data as CreateGameResponse).generateGame.gameData.data
+        this.gameId = (data as CreateGameResponse).generateGame.id
       }, err => {
         console.error(err);
       });
@@ -51,7 +51,12 @@ export class GameComponent implements OnInit {
         score++;
       }
     })
-    
+
+    this.gameService.setGameScore(this.gameId, score).subscribe( ({data}) => {
+      console.log(data);
+    }, err => {
+      console.error(err);
+    });
   }
 
   choose(index: number, event: any){
