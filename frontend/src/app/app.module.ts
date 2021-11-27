@@ -21,6 +21,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './interceptor/request.interceptor';
 import { GraphQLModule } from './graphql.module';
 import { GameComponent } from './component/game/game.component';
+import { WhoAreWeComponent } from './component/who-are-we/who-are-we.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { GameComponent } from './component/game/game.component';
     HomeComponent,
     ProfileComponent,
     AuthenticateComponent,
-    GameComponent
+    GameComponent,
+    WhoAreWeComponent
   ],
   imports: [
     BrowserModule,
