@@ -63,8 +63,9 @@ export class GameService {
   }
 
   getGames(){
-    return this.apollo.query<GetGamesResponse>({
-      query: GET_GAMES
+    return this.apollo.watchQuery<GetGamesResponse>({
+      query: GET_GAMES,
+      fetchPolicy: 'cache-and-network'
     });
   }
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Game } from 'src/app/model/game';
 import { GameService } from 'src/app/service/game/game.service';
 import { UserService } from 'src/app/service/user/user.service';
@@ -14,24 +15,21 @@ export class ProfileComponent implements OnInit {
   scoreAverage: number = -1;
   isAuthenticated: boolean = false;
   displayedColumns: string[] = ["id", "theme", "score"]
+  private querySubscription: Subscription = new Subscription;
 
   constructor(private userService: UserService, private gameService: GameService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.userService.authUserSub.subscribe( user => {
       if (user) {
         this.isAuthenticated = true;
-        this.getGames();
       }else{
         this.isAuthenticated = false;
       }
     })
+    this.userService.tryAutoConnect();
 
-    this.userService.tryAutoConnect()    
-  }
-
-  getGames(){
-    this.gameService.getGames().subscribe( ({data}) => {
+    this.querySubscription = this.gameService.getGames().valueChanges.subscribe( ({data}) => {      
       let temp = Object.assign([], data.getUserGames);
       this.games = temp.reverse();
       let cumulativeScore: number = 0;
@@ -40,8 +38,13 @@ export class ProfileComponent implements OnInit {
         cumulativeScore += game.score;
         cumulativeDifficulty += game.difficulty;
       })
-      this.scoreAverage = cumulativeScore/cumulativeDifficulty*100;      
+      this.scoreAverage = Math.trunc(cumulativeScore/cumulativeDifficulty*100);
     })
+    
+  }
+
+  ngOnDestroy(){
+    this.querySubscription.unsubscribe();
   }
 
 }

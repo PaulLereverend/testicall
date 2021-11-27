@@ -8,6 +8,7 @@ import { User } from 'src/app/model/user';
 })
 export class UserService {
 
+  authUser: User | undefined = undefined
   authUserSub: Subject<User> = new Subject();
 
   constructor(private http: HttpClient) { }
@@ -26,14 +27,16 @@ export class UserService {
   tryAutoConnect(){
     if (localStorage.getItem('token')) {
       this.http.get<User>("http://localhost:7050/user/loggedUser").subscribe(user => {
-        this.authUserSub.next(user)
+        this.authUser = user
+        this.authUserSub.next(this.authUser)
       })
     }
   }
 
   logUser(user: User){
-    this.authUserSub.next(user)
     let token = user.token?.replace("Bearer ", "")
     localStorage.setItem('token', token ? token : '');
+    this.authUser = user
+    this.authUserSub.next(this.authUser)
   }
 }

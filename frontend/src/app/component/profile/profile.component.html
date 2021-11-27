@@ -1,7 +1,7 @@
-<div *ngIf="!isAuthenticated" class="container">
+<div *ngIf="!isAuthenticated">
     <app-authenticate></app-authenticate>
 </div>
-<div *ngIf="isAuthenticated && games.length > 0" class="container">
+<div *ngIf="isAuthenticated && games.length > 0">
     <h1>Tableau des scores : {{scoreAverage}}% de bonnes réponses</h1>
     <table mat-table [dataSource]="games" class="mat-elevation-z8">
 
