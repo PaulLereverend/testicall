@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CreateGameResponse } from 'src/app/model/createGameResponse';
-import { GetAllThemesResponse } from 'src/app/model/getAllThemesResponse';
-import { Question } from 'src/app/model/question';
+import { GameData } from 'src/app/model/gameData';
 import { GameService } from 'src/app/service/game/game.service';
 
 @Component({
@@ -20,22 +18,28 @@ export class GameComponent implements OnInit {
   themes: string[] = [];
   errorMessage: boolean = false;
   gameId: string = "";
-  questions: Question[] = []
+  questions: GameData[] = []
   response: number[] = [];
+  showResponse: boolean = false;
+  score: number = 0;
 
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
     this.gameService.getAllThemes().subscribe( ({data}) => {
-      this.themes = (data as GetAllThemesResponse).getThemes
+      this.themes = data.getThemes
     })
   }
 
   createGame(){
     if (this.gameForm.value.theme && this.gameForm.value.difficulty) {
       this.gameService.newGame(this.gameForm.value.theme, this.gameForm.value.difficulty).subscribe( ({data}) => {
-        this.questions = (data as CreateGameResponse).generateGame.gameData.data
-        this.gameId = (data as CreateGameResponse).generateGame.id
+        if (data) {
+          this.questions = data.generateGame.gameData.data
+          console.log(this.questions);
+          
+          this.gameId = data.generateGame.id
+        }
       }, err => {
         console.error(err);
       });
@@ -45,15 +49,18 @@ export class GameComponent implements OnInit {
   }
 
   sendResult(){
-    let score = 0;
     this.response.forEach( (indexResponse, indexQuestion) => {
-      if (this.questions[indexQuestion].correctAnswer == indexResponse) {
-        score++;
+      if (this.questions[indexQuestion].correctAnswer-1 == indexResponse) {
+        this.score++;
       }
     })
 
-    this.gameService.setGameScore(this.gameId, score).subscribe( ({data}) => {
-      console.log(data);
+    console.log(this.gameId, this.score);
+    
+    this.gameService.setGameScore(this.gameId, this.score).subscribe( ({data}) => {
+      if (data?.setGameScore) {
+        this.showResponse = true;
+      }
     }, err => {
       console.error(err);
     });
@@ -61,6 +68,15 @@ export class GameComponent implements OnInit {
 
   choose(index: number, event: any){
     this.response[index] = event.value
+  }
+
+  replay(){
+    this.errorMessage = false;
+    this.gameId = "";
+    this.questions = []
+    this.response = [];
+    this.showResponse = false;
+    this.score = 0;
   }
 
 }

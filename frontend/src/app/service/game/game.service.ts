@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { CreateGameResponse } from 'src/app/model/createGameResponse';
+import { GetAllThemesResponse } from 'src/app/model/getAllThemesResponse';
+import { GetGamesResponse } from 'src/app/model/getGamesResponse';
+import { SetGameScoreResponse } from 'src/app/model/setGameScoreResponse';
 
 const GET_THEMES = gql`
   query {
@@ -28,6 +31,14 @@ const SET_GAME_SCORE = gql`
   }
 `;
 
+const GET_GAMES = gql`
+  query {
+    getUserGames{
+      id userId isFinished score theme difficulty
+    }
+  }
+`;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +47,7 @@ export class GameService {
   constructor(private apollo: Apollo) { }
 
   getAllThemes() {
-    return this.apollo.query({
+    return this.apollo.query<GetAllThemesResponse>({
       query: GET_THEMES
     });
   }
@@ -51,8 +62,14 @@ export class GameService {
     });
   }
 
+  getGames(){
+    return this.apollo.query<GetGamesResponse>({
+      query: GET_GAMES
+    });
+  }
+
   setGameScore(gameId: string, score: number){
-    return this.apollo.mutate<any>({
+    return this.apollo.mutate<SetGameScoreResponse>({
       mutation: SET_GAME_SCORE,
       variables: {
         gameId,

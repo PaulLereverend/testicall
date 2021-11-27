@@ -1,11 +1,11 @@
-import { Question } from "./question";
+import { GameData } from "./gameData";
 
 export interface CreateGameResponse {
   generateGame: {
     id: string,
     gameData: {
       theme: string,
-      data: Question[]
+      data: GameData[]
     }
   }
 }

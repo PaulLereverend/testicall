@@ -29,15 +29,26 @@
 
             <div class="center-verticaly">
                 <mat-radio-group class="center-verticaly">
-                    <mat-radio-button *ngFor="let answer of (question.answers);let indexOfResponse=index;" value="{{indexOfResponse}}" (change)="choose(indexOfQuestion, $event)">{{answer}}</mat-radio-button>
+                    <div *ngFor="let answer of (question.answers);let indexOfResponse=index;">
+                        <mat-radio-button [style.background]="indexOfResponse==question.correctAnswer-1 && showResponse ? 'green': 'none'" value="{{indexOfResponse}}" (change)="choose(indexOfQuestion, $event)">
+                            {{answer}}
+                        </mat-radio-button>
+                    </div>
                 </mat-radio-group>
             </div>
         </mat-card-content>
     </mat-card>
 
     <mat-card>
-        <mat-card-content class="center-verticaly">
+        <mat-card-content *ngIf="!showResponse" class="center-verticaly">
             <button mat-flat-button class="validButton" type="button" (click)="sendResult()">Valider</button>
+        </mat-card-content>
+        <mat-card-content *ngIf="showResponse" class="center-verticaly">
+            <h2>Vous avez {{score}} {{score>1 ? 'bonnes réponses' : 'bonne réponse'}} sur {{questions.length}}</h2>
+            <div>
+                <button mat-flat-button class="validButton" type="button" (click)="replay()">Rejouer</button>
+                <button mat-flat-button class="validButton" type="button" [routerLink]="['/user/profil']">Voir mon profil</button>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>
