@@ -13,14 +13,7 @@ export class AuthGuard implements CanActivate {
   constructor(public userService: UserService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    this.userService.authUserSub.subscribe( user => {
-      if (user) {
-        this.isAuthenticated = true;
-      }else{
-        this.isAuthenticated = false;
-      }
-    })
-    if (this.isAuthenticated) {
+    if (localStorage.getItem('token')) {
       return true;
     }else{
       this.router.navigate(['/user/profile']);
