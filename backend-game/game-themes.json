@@ -1,57 +1,57 @@
 {
   "themes": [
     {
-      "theme": "videoGames",
+      "theme": "cheese",
       "data": [
         {
-          "question": "1 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 1
-        },
-        {
-          "question": "2 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 3
-        },
-        {
-          "question": "3 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "Which one is not a blue cheese?",
+          "answers": ["Gorgonzola", "Roquefort", "Stilton", "Pecorino"],
           "correctAnswer": 4
         },
         {
-          "question": "4 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 4
-        },
-        {
-          "question": "5 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "Which one of these British cheeses is not semi-soft?",
+          "answers": ["Stinking Bishop", "Kidderton Ash", "Wigmore", "Cornish Yarg"],
           "correctAnswer": 2
         },
         {
-          "question": "6 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 1
-        },
-        {
-          "question": "7 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "How many pounds of milk do you need to make 1 pound of cheese?",
+          "answers": ["3", "5", "8", "10"],
           "correctAnswer": 4
         },
         {
-          "question": "8 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "How much did the heaviest cheese ever produced weigh?",
+          "answers": ["37,518 pounds", "47,518 pounds", "57,518 pounds", "67,518 pounds"],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Which one of these cheeses has holes?",
+          "answers": ["Gruyere", "Cheshire Cheese", "Leicester", "Gouda"],
           "correctAnswer": 1
         },
         {
-          "question": "9 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "When is National Cheese day in the United States?",
+          "answers": ["4th of May", "4th of June", "4th of July", "4th of August"],
           "correctAnswer": 2
         },
         {
-          "question": "10 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "Why did cheesemakers start dying cheese in Orange?",
+          "answers": ["To make people think it was better quality", "To enhance the taste", "To make it stand out on the shelves", "To make it prettier"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Which dish is made of fries, cheese and gravy?",
+          "answers": ["Poutine", "Fish and Chips", "Cottage Pie", "Jacket Potato"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "How many kilos of cheese do French people eat per year on average (per head)?",
+          "answers": ["12", "17", "22", "27"],
           "correctAnswer": 3
+        },
+        {
+          "question": "What cheese, particularly loved by kids, is wrapped in red wax?",
+          "answers": ["Kiri", "Laughing Cow", "Strings & Things", "Babybel"],
+          "correctAnswer": 4
         }
       ]
     },
@@ -59,54 +59,54 @@
       "theme": "series",
       "data": [
                 {
-          "question": "1 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 1
-        },
-        {
-          "question": "2 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 3
-        },
-        {
-          "question": "3 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 4
-        },
-        {
-          "question": "4 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 4
-        },
-        {
-          "question": "5 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "When were the Simpsons first released?",
+          "answers": ["1979", "1984", "1989", "1994"],
           "correctAnswer": 2
         },
         {
-          "question": "6 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "When was the first season of Mad Men released?",
+          "answers": ["2007", "2009", "2011", "2013"],
           "correctAnswer": 1
         },
         {
-          "question": "7 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "How many seasons of Shameless UK are there?",
+          "answers": ["4", "7", "11", "14"],
+          "correctAnswer": 3
+        },
+        {
+          "question": "In Charmed, which sister is the eldest?",
+          "answers": ["Prue", "Piper", "Paige", "Phoebe"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Who portrays Jen Lindley in Dawson’s Creek?",
+          "answers": ["Katie Holmes", "Bianca Lawson", "Audrey Dollar", "Michelle Williams"],
           "correctAnswer": 4
         },
         {
-          "question": "8 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "What is Dr Quinn’s first name?",
+          "answers": ["Michaela", "Jane", "Audrey", "Geraldine"],
           "correctAnswer": 1
         },
         {
-          "question": "9 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 2
+          "question": "What is the name of Sabrina’s cat in Sabrina the Teenage Witch?",
+          "answers": ["Salem", "Hilda", "Zelda", "Harvey"],
+          "correctAnswer": 1
         },
         {
-          "question": "10 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 3
+          "question": "Game of Thrones is an adaptation of the novels of which author?",
+          "answers": ["George R. R. Martin", "J. R. R. Tolkien", "J. K. Rowling", "C. S. Lewis"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Which actor can you see on both Gilmore Girls and The Good Wife?",
+          "answers": ["Matt Czuchry", "Josh Charles", "Scott Patterson", "Edward Herrmann"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Which character is Viola Davis portraying in “How to get away with murder”?",
+          "answers": ["Michaela Pratt", "Annalise Keating", "Bonnie Winterbottom", "Laurel Castillo"],
+          "correctAnswer": 2
         }
       ]
     },
@@ -114,54 +114,54 @@
       "theme": "music",
       "data": [
                 {
-          "question": "1 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 1
-        },
-        {
-          "question": "2 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 3
-        },
-        {
-          "question": "3 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 4
-        },
-        {
-          "question": "4 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 4
-        },
-        {
-          "question": "5 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "Medieval music was roughly between which years?",
+          "answers": ["500 BC - 500 AD", " 500 - 1400 AD", "1400 - 1750 AD", "1750 - 1830 AD"],
           "correctAnswer": 2
         },
         {
-          "question": "6 Combien?",
-          "answers": ["1", "2", "3", "4"],
-          "correctAnswer": 1
-        },
-        {
-          "question": "7 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "Which term means \"one single line of music\"?",
+          "answers": ["Polyphonic", "Homophonic", "Stereophonic", "Monophonic"],
           "correctAnswer": 4
         },
         {
-          "question": "8 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "Another word for Gregorian Chant is:",
+          "answers": ["Singsong", "Ostinato", "Plainsong", "Cantata"],
+          "correctAnswer": 3
+        },
+        {
+          "question": "In Medieval music, the intervals most used for harmony were the:",
+          "answers": ["Second & seventh", "Third & sixth", "Fifth & fourth"],
+          "correctAnswer": 3
+        },
+        {
+          "question": "A single melodic line with other voice parts added for decoration was called:",
+          "answers": ["Organum", "Oragano", "Origami", "Organic"],
           "correctAnswer": 1
         },
         {
-          "question": "9 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "The period of music which followed Medieval is the:",
+          "answers": ["Renaissance", "Modern", "Classical", "Romantic", "Baroque"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "During the Renaissance, which interval became widely used in harmony?",
+          "answers": ["Augmented third", "Major third", "Augmented fourth", "Minor seventh"],
           "correctAnswer": 2
         },
         {
-          "question": "10 Combien?",
-          "answers": ["1", "2", "3", "4"],
+          "question": "Which instrument was invented during the Renaissance period?",
+          "answers": ["Viola", "Violin", "Viol", "Violoncello"],
           "correctAnswer": 3
+        },
+        {
+          "question": "The Baroque era began in about 1600 and ended at the time of the death of which composer?",
+          "answers": ["Palestrina", "Bach", "Beethoven", "Mozart"],
+          "correctAnswer": 2
+        },
+        {
+          "question": "The Baroque style of a single voice accompanied by an instrumental bass line and chords was called:",
+          "answers": ["Parody", "Monody", "Polyphony", "Soliloquy"],
+          "correctAnswer": 2
         }
       ]
     }
