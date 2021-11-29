@@ -1,5 +1,5 @@
 # Stage 1 - the build process
-FROM node:10 as compile-server
+FROM node:12.22-buster as compile-server
 WORKDIR /usr/src/app
 COPY . .
 RUN npm install
