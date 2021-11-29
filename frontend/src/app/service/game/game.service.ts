@@ -62,6 +62,7 @@ export class GameService {
     });
   }
 
+  // https://medium.com/@galen.corey/understanding-apollo-fetch-policies-705b5ad71980
   getGames(){
     return this.apollo.watchQuery<GetGamesResponse>({
       query: GET_GAMES,
