@@ -1,16 +1,14 @@
 <mat-toolbar>
     <span [routerLink]="['/']" id="title">TestICall</span>
-    <button mat-button [routerLink]="['/user/profile']">Le jeu</button>
+    <button mat-button [routerLink]="['/game']">Le jeu</button>
 
-    <button mat-button [routerLink]="['/user/profile']">Below</button>
-
-    <button mat-button [routerLink]="['/user/profile']">Before</button>
-
-    <button mat-button [routerLink]="['/user/profile']">Qui sommes-nous ?</button>
+    <button mat-button [routerLink]="['/whoarewe']">Qui sommes-nous ?</button>
 
     <span class="spacer"></span>
     <button mat-icon-button [routerLink]="['/user/profile']">
       <mat-icon>account_circle</mat-icon>
     </button>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
