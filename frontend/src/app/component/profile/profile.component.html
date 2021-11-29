@@ -1,6 +1,34 @@
-<div *ngIf="!this.isAuthenticated()" class="container">
+<div *ngIf="!isAuthenticated">
     <app-authenticate></app-authenticate>
 </div>
-<div *ngIf="this.isAuthenticated()" class="container">
-    Tu es connecté bg
+<div *ngIf="isAuthenticated && games.length > 0">
+    <h1>Tableau des scores : {{scoreAverage}}% de bonnes réponses</h1>
+    <table mat-table [dataSource]="games" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Identifiant </th>
+            <td mat-cell *matCellDef="let game"> {{game.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="theme">
+            <th mat-header-cell *matHeaderCellDef> Thème </th>
+            <td mat-cell *matCellDef="let game"> {{game.theme}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="score">
+            <th mat-header-cell *matHeaderCellDef> Score </th>
+            <td mat-cell *matCellDef="let game"> {{game.score}}/{{game.difficulty}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<div *ngIf="isAuthenticated && games.length == 0" class="container">
+    <h1>Tableau des scores :</h1>
+    <mat-card>
+        <mat-card-content class="center-verticaly">
+            <h2>Vous n'avez pas de score. Faite une partie pour obtenir un score.</h2>
+        </mat-card-content>
+    </mat-card>
 </div>
