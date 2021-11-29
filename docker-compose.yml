@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  backend-user:
+    build: ./backend-user
+    depends_on:
+      - mysql
+    ports:
+      - "7050:7050"
+  backend-game:
+    build: ./backend-game
+    depends_on:
+      - postgres
+    ports:
+      - "4000:4000"
+  front:
+    build: ./frontend
+    ports:
+      - "80:80"
+  postgres:
+    image: postgres:11.10
+    hostname: postgres
+    volumes:
+      - ./postgres/:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgresql
+      POSTGRES_DB: users
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'testicall_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
